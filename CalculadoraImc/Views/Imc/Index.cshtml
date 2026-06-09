@@ -1,0 +1,38 @@
+@model CalculadoraImc.Models.ImcModel
+
+@{
+    ViewData["Title"] = "Cálculo de IMC";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">⚖️ Calculadora de IMC</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Index" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Peso" class="form-label fw-bold">Peso (kg):</label>
+                            <input asp-for="Peso" class="form-control" type="number" step="0.01" required placeholder="Ex: 70,5" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Altura" class="form-label fw-bold">Altura (metros):</label>
+                            <input asp-for="Altura" class="form-control" type="number" step="0.01" required placeholder="Ex: 1,75" />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">Calcular no Servidor</button>
+                    </form>
+
+                    @if (Model.ResultadoImc > 0)
+                    {
+                        <div class="alert alert-success mt-4 text-center">
+                            <h4>Seu IMC é: <strong>@Model.ResultadoImc.ToString("F2")</strong></h4>
+                            <p class="mb-0 fs-5">Classificação: <strong>@Model.Classificacao</strong></p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
